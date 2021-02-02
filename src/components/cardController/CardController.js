@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 //import FormCard from '../FormCard/FormCard.js';
 import dataCards from '../../dataSample/data.json';
-import CardList from '../cardList/CardList.js'
+import CardList from '../cardList/CardList.js';
 
 const useCardList = () => {
     const [state, setState] = useState({

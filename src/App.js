@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import  CardController from './components/CardController/CardController.js'
+import  CardController from './components/cardController/CardController.js'
 
 const App = () => {
   return (
