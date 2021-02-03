@@ -4,13 +4,13 @@ export default function orderbyTitle(cards,typeOrder){
       return card.title;
     })
   
+
     typeOrder ? anames.sort() : anames.sort().reverse()
     let objOrdered = []
     let indexOrdered = []
 
-    const isInside = (n) => { // it's position is already ordered
-        return indexOrdered.find(e => e === n);
-    }
+    const isInside = (n) => indexOrdered.find(e => e === n); // it's position is already ordered
+        
     
     for(let i=0;i<anames.length;i++){
         for(let j=0;j<cards.length;j++){
