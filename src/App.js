@@ -4,9 +4,7 @@ import  CardController from './components/cardController/CardController.js'
 
 const App = () => {
   return (
-      <div>
-          <CardController/>
-      </div>
+      <CardController/> 
   );
 }
 

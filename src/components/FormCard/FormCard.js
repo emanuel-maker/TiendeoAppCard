@@ -1,114 +1,114 @@
 import React, { useState } from 'react';
+import Input from '../commons/Input.js';
+import Button from '../commons/Button.js';
 import './FormCard.css';
 
-FormCard = () => {
+const FormCard = (props) => {
 
-  return (
-    <div>
-      
-    </div>
-  );
+  const [state, setState] = useState({
+    id : props.id,
+    title : props.title,
+    desc : props.desc,
+    imgUrl : props.imgUrl,
+    isEditedCard : props.isEditedCard
+  }) 
 
-}
+  const [messageError, setMessageError] = useState('')
 
-export default FormCard;
-
-/*class FormCard extends Component{
-
-  state = {
-    id : this.props.id,
-    title : this.props.title,
-    desc : this.props.desc,
-    imgUrl : this.props.imgUrl,
-    isEditedCard : this.props.isEditedCard,
-    messageError : ''
+  function showMessageError(){
+    setMessageError('Campos Titulo y Descripción requeridos') 
   }
 
-  onChange = e => {
-    this.setState({
-      [e.target.name]:e.target.value
-    })
+  function hideMessageError(){
+    setMessageError('')
   }
 
-  showMessageError = () => {
-    this.setState({
-      messageError : 'Campos Titulo y Descripción requeridos'
-    }) 
-  }
-
-  hideMessageError = () => {
-    this.setState({
-      messageError : ''
-    }) 
-  }
-
-  resetValues = () => {
-    this.setState({
+  function resetValues(){
+    setState({
+      ...state,
       title : '',
       desc : '',
       imgUrl : '',
     }) 
   }
 
-  validate = () => {
-    return (this.state.title !== '' && this.state.desc !== '')
+  function validate(){
+    return (state.title !== '' && state.desc !== '')
   }
 
-  eventHandlerSaveData = (e) => {
+  function updateState(nameInput,value){
+    setState({
+      ...state,
+      [nameInput]:value
+    })
+  }
+
+  function eventHandlerSaveData(e){
 
     const card = {
-      id : this.state.id,
-      title : this.state.title,
-      desc : this.state.desc,
-      imgUrl : this.state.imgUrl
+      id : state.id,
+      title : state.title,
+      desc : state.desc,
+      imgUrl : state.imgUrl
     }
 
-    if(this.validate()){
-      e.target.name === 'saveNewCard' ? this.props.saveNewCard(card) :
-      this.props.saveEditedCard(card)
-      this.hideMessageError()
-      this.resetValues()
+    if(validate()){
+      e.target.name === 'saveNewCard' ? 
+      props.saveNewCard(card) : props.saveEditedCard(card)
+
+      hideMessageError()
+      resetValues()
     }else{
-      this.showMessageError()
+      showMessageError()
     }
   }
 
-  render(){
-    return (
-        <div className='form'>
-           {!this.state.isEditedCard ? 
+  return (
+    <div className='form'>
+           {!state.isEditedCard ? 
            <h2>Nueva Tarjeta</h2> : 
            <h2>Modifica Tarjeta</h2> }
-
             <form className="container-inputs">
-                  <p>{this.state.messageError}</p>
-                  <input name="title" type="text" 
-                  value={this.state.title} 
-                  onChange={this.onChange} 
-                  maxLength="40" placeholder="Titulo"/>
+              <p>{messageError}</p>
+              <Input 
+              name="title" 
+              value={state.title}
+              updateState={updateState}
+              maxLength="100" 
+              placeholder="Titulo"
+              /> 
 
-                  <input name="desc" type="text" 
-                  value={this.state.desc} 
-                  onChange={this.onChange} 
-                  maxLength="100" placeholder="Descripción"/>
+              <Input 
+              name="desc" 
+              value={state.desc}
+              updateState={updateState}
+              maxLength="100" 
+              placeholder="Descripción"
+              /> 
 
-                  <input name="imgUrl" type="text" 
-                  value={this.state.imgUrl} 
-                  onChange={this.onChange} placeholder="Imagen(URL)"/>
+            <Input 
+              name="imgUrl" 
+              value={state.imgUrl}
+              updateState={updateState}
+              maxLength="100" 
+              placeholder="Imagen URL"
+              />
+              
             </form> 
             <div className="container-btn">
             
-            {!this.state.isEditedCard ?  
-            <button name="saveNewCard" onClick={this.eventHandlerSaveData}> Añadir</button> : 
-            <button name="saveEditedCard" onClick={this.eventHandlerSaveData}> Confirmar</button>}
-            <button onClick={this.props.toggleForm.bind(this)}> Cancelar</button>
+            {!state.isEditedCard ?  
+            <Button message="Añadir" name="saveNewCard" onClick={eventHandlerSaveData}/> : 
+            <Button message="Confirmar" name="saveEditedCard" onClick={eventHandlerSaveData}/>}
+            <Button message="Cancelar" onClick={props.toggleForm}/>
             </div>
-        </div>
-    )
-  }
+      </div>
+  );
+
 }
 
-export default FormCard; */
+export default FormCard;
+
 
 
 

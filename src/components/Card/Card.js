@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import Button from '../commons/Button.js';
 import './Card.css';
 
 
@@ -21,8 +22,8 @@ const Card = (props) => {
                 </div>
             </div>
             <div className="back-card">
-                <button className="btn-delete" onClick={() => {props.eventHandlerDeleteCard(props.card.id)}}>Eliminar</button>
-                <button className="btn-edit" onClick={() => {props.eventHandlerEditCard(props.card.id)}}>Editar</button>
+                <Button message="Eliminar" onClick={() => {props.eventHandlerDeleteCard(props.card.id)}}/>
+                <Button message="Editar" onClick={() => {props.eventHandlerEditCard(props.card.id)}}/>
             </div>
         </div>  
     );
